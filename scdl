@@ -131,8 +131,10 @@ function downallsongs() {
             title=$(echo -e "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</title" | cut -d "<" -f 1 | recode html..UTF-16)
             filename=$(echo "$title".mp3 | tr '*/\?"<>|' '+       ' )
             if [ -e "$filename" ]; then
-                echo "[!] The song $filename has already been downloaded..."  && $cont
+                echo "[!] The song $filename has already been downloaded..."; else
+                downallsongs1()
             fi
+        function downallsongs1() {
             artist=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</username" | cut -d "<" -f 1 | recode html..UTF-16)
             genre=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</genre" | cut -d "<" -f 1 | recode html..UTF-16)
             imageurl=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</artwork-url" | cut -d "<" -f 1 | sed 's/large/t500x500/g')
@@ -144,6 +146,7 @@ function downallsongs() {
             settags "$artist" "$title" "$filename" "$genre" "$imageurl"
             echo -e "[i] Downloading of $filename finished\n"
         fi
+        }
     done
 }
 
