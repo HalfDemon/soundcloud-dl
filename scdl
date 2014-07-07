@@ -134,12 +134,7 @@ function downallsongs() {
                 echo "[!] The song $filename has already been downloaded..."; else
                 downallsongs1
             fi
-        
-    done
-}
-
-function downallsongs1() 
-		{
+        function downallsongs1() {
             artist=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</username" | cut -d "<" -f 1 | recode html..UTF-16)
             genre=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</genre" | cut -d "<" -f 1 | recode html..UTF-16)
             imageurl=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</artwork-url" | cut -d "<" -f 1 | sed 's/large/t500x500/g')
@@ -150,7 +145,10 @@ function downallsongs1()
             curl -# -L --user-agent 'Mozilla/5.0' -o "`echo -e "$filename"`" "$songurl";
             settags "$artist" "$title" "$filename" "$genre" "$imageurl"
             echo -e "[i] Downloading of $filename finished\n"
+        fi
         }
+    done
+}
 
 function downgroup() {
     groupurl="$1"
