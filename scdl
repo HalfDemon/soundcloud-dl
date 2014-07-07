@@ -132,7 +132,7 @@ function downallsongs() {
             filename=$(echo "$title".mp3 | tr '*/\?"<>|' '+       ' )
             if [ -e "$filename" ]; then
                 echo "[!] The song $filename has already been downloaded..."; else
-                downallsongs1
+                downallsongs1()
             fi
         function downallsongs1() {
             artist=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</username" | cut -d "<" -f 1 | recode html..UTF-16)
