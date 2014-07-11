@@ -46,6 +46,8 @@ function install() {
 
 function setpath() {
     echo "Where do you want to download your Music?"
+    echo 'Please enter path as an absolute.'
+    echo 'Example: /home/username/music'
     read -p 'path : ' path
     if [ -d $path ]; then
         echo -e 'pathtomusic="'"$path"'"'"\n"'continue="'"$cont"'"' > /$HOME/.scdl.cfg
