@@ -132,9 +132,10 @@ function downallsongs() {
             filename=$(echo "$title".mp3 | tr '*/\?"<>|' '+       ' )
             if [ -e "$filename" ]; then
                 echo "[!] The song $filename has already been downloaded..."; else
-                downallsongs1()
-            fi
-    done
+                downallsongs1
+     fi
+    fi
+	done
 }
 function downallsongs1() {
             artist=$(echo "$songs" | sed -n "$i"p | tr ">" "\n" | grep "</username" | cut -d "<" -f 1 | recode html..UTF-16)
@@ -147,7 +148,6 @@ function downallsongs1() {
             curl -# -L --user-agent 'Mozilla/5.0' -o "`echo -e "$filename"`" "$songurl";
             settags "$artist" "$title" "$filename" "$genre" "$imageurl"
             echo -e "[i] Downloading of $filename finished\n"
-        fi
         }
 
 function downgroup() {
